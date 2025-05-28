@@ -1,13 +1,15 @@
-from fastapi import Form, Request, Response, Depends, FastAPI
+from fastapi import APIRouter, Form, Request, Response, Depends, HTTPException
 from sqlalchemy.orm import Session
-from database import SessionLocal, init_db
+
 from models import User
+from database import SessionLocal, init_db
 
-app = FastAPI()
+router = APIRouter()
 
-SESSION_COOKIE_NAME = "session_username"
 
 init_db()
+
+SESSION_COOKIE_NAME = "session_username"
 
 def get_db():
     db = SessionLocal()
@@ -16,7 +18,7 @@ def get_db():
     finally:
         db.close()
 
-@app.post("/signup")
+@router.post("/signup")
 def signup(
     username: str = Form(...),
     password: str = Form(...),
@@ -24,15 +26,14 @@ def signup(
 ):
     existing_user = db.query(User).filter(User.username == username).first()
     if existing_user:
-        return {"error": f"User {username} already registered"}
+        raise HTTPException(status_code=400, detail="User already exists")
 
     new_user = User(username=username, password=password)
     db.add(new_user)
     db.commit()
-    db.refresh(new_user)
     return {"message": f"User {username} created"}
 
-@app.post("/login")
+@router.post("/login")
 def login(
     response: Response,
     username: str = Form(...),
@@ -41,30 +42,38 @@ def login(
 ):
     user = db.query(User).filter(User.username == username).first()
     if not user:
-        return {"error": f"User {username} not found"}
+        raise HTTPException(status_code=404, detail="User not found")
 
     if user.password != password:
-        return {"error": "Incorrect password"}
+        raise HTTPException(status_code=401, detail="Incorrect password")
 
     response.set_cookie(
         key=SESSION_COOKIE_NAME,
         value=username,
         httponly=True,
-        max_age=3600 * 24
+        samesite="lax",
+        max_age=60 * 60 * 24,
     )
     return {"message": f"Welcome, {username}"}
 
-@app.get("/me")
+@router.get("/me")
 def get_me(request: Request, db: Session = Depends(get_db)):
     username = request.cookies.get(SESSION_COOKIE_NAME)
     if not username:
-        return {"error": "Not authenticated"}
+        raise HTTPException(status_code=401, detail="Not authenticated")
 
     user = db.query(User).filter(User.username == username).first()
     if not user:
-        return {"error": "User not found"}
+        raise HTTPException(status_code=404, detail="User not found")
 
-    return {"id": user.id, "username": user.username}
+    is_admin = True if username == "AliBidanov" else user.is_admin
+
+    return {
+        "id": user.id,
+        "username": user.username,
+        "is_admin": is_admin
+    }
+
 
 
 

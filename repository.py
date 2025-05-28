@@ -15,6 +15,7 @@ class UserRepository:
         self.db.refresh(user)
         return user
 
+
 class NoteRepository:
     def __init__(self, db: Session):
         self.db = db
@@ -36,6 +37,11 @@ class NoteRepository:
             self.db.commit()
             return "Note was deleted"
         return "Note not found"
+
+    def get_all_notes(self):
+        return self.db.query(Notes).all()
+
+
 
 
 

@@ -1,0 +1,102 @@
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-header {
+  margin-bottom: 1rem;
+}
+
+.admin-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.admin-subtitle {
+  color: var(--text-light);
+}
+
+.admin-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+}
+
+.admin-tab {
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.admin-tab:hover {
+  background-color: var(--secondary-color);
+}
+
+.admin-tab.active {
+  border-bottom: 2px solid var(--primary-color);
+  font-weight: 500;
+}
+
+.admin-section {
+  background-color: var(--card-background);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.admin-section h3 {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.admin-loading {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-light);
+}
+
+.admin-table-container {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-table th {
+  background-color: var(--secondary-color);
+  font-weight: 500;
+}
+
+.admin-table tr:hover {
+  background-color: var(--secondary-color);
+}
+
+.note-content {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .admin-table {
+    min-width: 600px;
+  }
+}

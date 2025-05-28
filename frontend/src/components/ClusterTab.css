@@ -1,0 +1,62 @@
+.clusters-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.clusters-header {
+  margin-bottom: 1rem;
+}
+
+.clusters-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.clusters-subtitle {
+  color: var(--text-light);
+}
+
+.clusters-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.cluster-notes-list {
+  list-style: none;
+  padding: 0;
+}
+
+.cluster-note-item {
+  padding: 0.75rem;
+  background-color: var(--secondary-color);
+  border-radius: var(--radius);
+  margin-bottom: 0.5rem;
+  word-break: break-word;
+}
+
+.clusters-loading,
+.clusters-error,
+.clusters-empty {
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--card-background);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+}
+
+.clusters-error {
+  color: var(--error-color);
+}
+
+.clusters-empty {
+  color: var(--text-light);
+}
+
+@media (min-width: 768px) {
+  .clusters-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,50 @@
+.memory-map-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.memory-map-header {
+  margin-bottom: 1rem;
+}
+
+.memory-map-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.memory-map-subtitle {
+  color: var(--text-light);
+}
+
+.memory-map-container {
+  height: 500px;
+  background-color: var(--secondary-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+}
+
+.memory-map-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.memory-map-loading,
+.memory-map-error,
+.memory-map-empty {
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--card-background);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+}
+
+.memory-map-error {
+  color: var(--error-color);
+}
+
+.memory-map-empty {
+  color: var(--text-light);
+}

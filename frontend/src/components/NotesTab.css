@@ -1,0 +1,41 @@
+.notes-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.notes-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.notes-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.notes-subtitle {
+  color: var(--text-light);
+}
+
+.notes-loading,
+.notes-error {
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--card-background);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+}
+
+.notes-error {
+  color: var(--error-color);
+}
+
+@media (min-width: 768px) {
+  .notes-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
