@@ -13,7 +13,6 @@ function Header({ username, isDarkMode, toggleDarkMode, handleLogout, toggleSide
     setIsUserMenuOpen(!isUserMenuOpen)
   }
 
-  // Close the user menu when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {

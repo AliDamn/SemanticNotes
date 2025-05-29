@@ -9,7 +9,6 @@ function AdminUserManager({ users, onUserUpdated }) {
   const [successMessage, setSuccessMessage] = useState(null)
 
   const handleToggleAdmin = async (user) => {
-    // Если пользователь уже админ, спрашиваем подтверждение на удаление прав
     if (user.is_admin) {
       if (!window.confirm(`Удалить права администратора у пользователя ${user.username}?`)) {
         return
@@ -42,7 +41,7 @@ function AdminUserManager({ users, onUserUpdated }) {
       const data = await response.json()
       setSuccessMessage(data.message)
 
-      // Обновляем список пользователей
+
       if (onUserUpdated) {
         onUserUpdated()
       }

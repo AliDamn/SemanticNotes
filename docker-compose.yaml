@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    command: sh -c "uvicorn app:app --reload --port=8000 --host=0.0.0.0"
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://myuser:mypassword@localhost:5432/notesdb
+
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=notesdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

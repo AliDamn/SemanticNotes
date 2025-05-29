@@ -9,7 +9,6 @@ function Sidebar({ activeTab, setActiveTab, isOpen, toggleSidebar, isAdmin }) {
   const handleTabClick = (tab) => {
     setActiveTab(tab)
 
-    // Navigate to the appropriate route
     switch (tab) {
       case "notes":
         navigate("/dashboard")

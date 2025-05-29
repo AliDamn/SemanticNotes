@@ -38,12 +38,10 @@ function MemoryMapTab() {
   useEffect(() => {
     if (!memoryMap || memoryMap.error || !svgRef.current) return
 
-    // Clear any existing SVG content
     while (svgRef.current.firstChild) {
       svgRef.current.removeChild(svgRef.current.firstChild)
     }
 
-    // Import d3 dynamically to avoid server-side rendering issues
     import("d3").then((d3) => {
       const svg = d3.select(svgRef.current)
       const width = svgRef.current.clientWidth
@@ -72,7 +70,7 @@ function MemoryMapTab() {
         weight: edge.weight,
       }))
 
-      // Create the links
+
       const link = svg
         .append("g")
         .selectAll("line")
@@ -82,7 +80,6 @@ function MemoryMapTab() {
         .attr("stroke-width", (d) => d.weight * 3)
         .attr("stroke", "rgba(100, 100, 100, 0.5)")
 
-      // Create the nodes
       const node = svg
         .append("g")
         .selectAll("g")
@@ -91,10 +88,10 @@ function MemoryMapTab() {
         .append("g")
         .call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended))
 
-      // Add circles to the nodes
+
       node.append("circle").attr("r", 20).attr("fill", "#3b82f6").attr("stroke", "#2563eb").attr("stroke-width", 2)
 
-      // Add text to the nodes
+
       node
         .append("text")
         .text((d) => {
@@ -106,10 +103,10 @@ function MemoryMapTab() {
         .attr("fill", "white")
         .style("font-size", "10px")
 
-      // Add tooltips
+
       node.append("title").text((d) => d.text)
 
-      // Update positions on each tick
+
       simulation.nodes(nodes).on("tick", () => {
         link
           .attr("x1", (d) => d.source.x)
@@ -122,7 +119,7 @@ function MemoryMapTab() {
 
       simulation.force("link").links(links)
 
-      // Drag functions
+
       function dragstarted(event) {
         if (!event.active) simulation.alphaTarget(0.3).restart()
         event.subject.fx = event.subject.x
