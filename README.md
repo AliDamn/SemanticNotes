@@ -2,4 +2,6 @@
 <h3 align="center">Computer science student,from Kazakhstan</h3>
 
 My stack is:
+
+
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
